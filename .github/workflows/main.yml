@@ -16,7 +16,7 @@ jobs:
           npm run build
 
       - name: Archive chrome-extension artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: darkreader-chrome
           path: build/release/darkreader-chrome.zip
