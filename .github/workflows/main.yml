@@ -1,4 +1,8 @@
 name: 'Build Chrome extension'
+on:
+  push:
+    branches:
+      - main
 runs:
   steps:
     - name: Setup Node.js
