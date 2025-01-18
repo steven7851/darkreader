@@ -3,23 +3,20 @@ on:
   push:
     branches:
       - main
-runs:
-  steps:
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+jobs:
+  build-chrome-extension:
+    name: Build Chrome extension artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Install packages
-      run: npm ci
-      shell: bash
+      - name: Build
+        run: |-
+          npm run build
 
-    - name: Build extension
-      run: npm run build --if-present
-      shell: bash
-
-    - name: Upload extension archive
-      uses: actions/upload-artifact@v3
-      with:
-        name: darkreader-chrome
-        path: build/release/darkreader-chrome.zip
+      - name: Archive chrome-extension artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: darkreader-chrome
+          path: build/release/darkreader-chrome.zip
