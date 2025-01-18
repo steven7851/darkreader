@@ -1,0 +1,21 @@
+name: 'Build Chrome extension'
+runs:
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install packages
+      run: npm ci
+      shell: bash
+
+    - name: Build extension
+      run: npm run build --if-present
+      shell: bash
+
+    - name: Upload extension archive
+      uses: actions/upload-artifact@v3
+      with:
+        name: darkreader-chrome
+        path: build/release/darkreader-chrome.zip
